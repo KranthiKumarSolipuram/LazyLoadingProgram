@@ -1,0 +1,86 @@
+<form #addStud="ngForm" (ngSubmit)="addStudent()">
+  {{student | json}}
+  <div class="col-4">
+    <div class="mb-3">
+      <label for="studNumber" class="form-label">Student Number</label>
+      <input
+        type="text"
+        [(ngModel)]="student.stuNumber"
+        name="studNumber"
+        id="studNumber"
+        class="form-control"
+        placeholder="Student Number"
+      />
+      <small id="empNumber" class="text-muted"
+        >Student Number is Mandatory</small
+      >
+    </div>
+    <div class="mb-3">
+      <label for="studName" class="form-label">Student Name</label>
+      <input
+        type="text"
+        [(ngModel)]="student.stuName"
+        name="studName"
+        id="studName"
+        class="form-control"
+        placeholder="Student Name"
+      />
+      <small id="studName" class="text-muted">Student Name is Mandatory</small>
+    </div>
+    <div class="mb-3">
+      <label for="studdob" class="form-label">Select Date of Birth</label>
+      <input
+        type="Date"
+        [(ngModel)]="student.studdob"
+        name="studdob"
+        id="studdob"
+        class="form-control"
+        placeholder="Select Date"
+      />
+      <small id="studdob" class="text-muted"
+        >Student Date of Birth is Mandatory</small
+      >
+    </div>
+  </div>
+  <div class="col-8">
+    <div class="mb-3">
+      <table class="table">
+       <thead>
+        <tr>
+          <th>Name</th>
+          <th>University</th>
+          <th>Year of Pass</th>
+          <th>Percentage</th>
+        </tr>
+       </thead>
+       <tbody>
+        <tr *ngFor="let qua of student.qualification">
+          <td>
+            <input type="text" name="name" [(ngModel)]="qua.name">
+          </td>
+          <td>
+            <input type="text" name="university" [(ngModel)]="qua.university">
+          </td>
+          <td>
+            <input type="text" name="yearOfPass" [(ngModel)]="qua.yearOfPass">
+          </td>
+          <td>
+            <input type="text" name="percentage" [(ngModel)]="qua.percentage">
+          </td>
+        </tr>
+       </tbody>
+       <tfoot>
+        <tr>
+          <td colspan="4" align="right">
+            <input type="button" value="Add Row" class="btn btn-success" (click)="addRow()"> &nbsp;
+            <input type="button" value="Delete Row" class="btn btn-danger" (click)="deleteRow()"> &nbsp;
+          </td>
+        </tr>
+       </tfoot>
+      </table>
+    </div>
+  </div>
+  <div class="col-4">
+    <input type="submit" value="Add Student" class="btn btn-primary">
+  </div>
+</form>

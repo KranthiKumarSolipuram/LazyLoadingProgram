@@ -1,0 +1,143 @@
+<div class="col-4">
+    <form class="addEmp" #addEmp="ngForm"  (ngSubmit)="addEmp.valid && addEmployee(addEmp)">
+       <!-- {{employee|json}} -->
+        <div class="mb-3">
+          <label for="empNumber" class="form-label"
+            >Employee Number</label
+          >
+          <input
+            type="text"
+            name="empNumber"
+            #empNumber = "ngModel"
+            id="empNumber"
+            class="form-control"
+            placeholder="Employee Number"
+            aria-describedby="empNumber"
+            [(ngModel)]="employee.empNumber"
+            required
+          >
+          <small *ngIf="(empNumber.invalid && empNumber.touched  || empNumber.invalid && addEmp.submitted)" id="empNumber" class="text-muted"
+            >Employee Number is Mandatory</small
+          >
+        </div> <br>
+        <div class="mb-3">
+            <label for="empSalary" class="form-label"
+              >Employee Salary</label
+            >
+            <input
+              type="text"
+              name="empSalary"
+              #empSalary="ngModel"
+              id="empSalary"
+              class="form-control"
+              placeholder="Employee Salary"
+              aria-describedby="empSalary"
+              [(ngModel)]="employee.empSalary"
+              required
+            />
+            <small *ngIf="(empSalary.invalid && empSalary.touched  || empSalary.invalid && addEmp.submitted)" id="empSalary" class="text-muted"
+              >Employee Salary is Mandatory</small
+            >
+          </div><br>
+          <div class="mb-3">
+            <label for="empName" class="form-label"
+              >Employee Name</label
+            >
+            <input
+              type="text"
+              name="empName"
+              #empName="ngModel"
+              id="empName"
+              class="form-control"
+              placeholder="Employee Name"
+              aria-describedby="empName"
+              [(ngModel)]="employee.empName"
+              required
+            />
+            <small *ngIf="(empName.invalid && empName.touched  || empName.invalid && addEmp.submitted)" id="empName" class="text-muted"
+              >Employee Name is Mandatory</small
+            >
+          </div><br>
+          <div class="mb-3">
+            <label for="empAddress" class="form-label"
+              >Employee Address</label
+            >
+            <input
+              type="text"
+              name="empAddress"
+              id="empAddress"
+              class="form-control"
+              placeholder="Employee Address"
+              aria-describedby="empAddress"
+              [(ngModel)]="employee.empAddress"
+            />
+          </div>
+        <div class="mb-3">
+            <input type="submit" class="btn btn-primary" value="Add Employee">
+        </div>
+      </form>
+</div>
+<br>
+<br>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>
+        <input
+          type="checkbox"
+          [(ngModel)]="checkAllStatus"
+          (change)="checkAll()"
+          (change)="checkStatus()"
+        />
+      </th>
+      <th>S1. Number</th>
+      <th>Emp. Number</th>
+      <th>Emp. Name</th>
+      <th>Emp. Salary</th>
+      <th>Emp. Address</th>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- [ngStyle]="emp.empSalary >= 6000 ? { 'color': 'red' } : { 'color': 'blue' }" -->
+    <tr
+      *ngFor="let emp of employees; let i = index"
+      [ngClass]="{ lessSalary: emp.empSalary <= 65000 }"
+    >
+      <td>
+        <input
+          type="checkbox"
+          [(ngModel)]="emp.isSelected"
+          (change)="checkStatus()"
+        />
+      </td>
+      <td>{{ i + 1 }}</td>
+      <td>{{ emp.empNumber }}</td>
+      <td>{{ emp.empName }}</td>
+      <td>{{ emp.empSalary }}</td>
+      <td>{{ emp.empAddress ? emp.empAddress : "--" }}</td>
+    </tr>
+  </tbody>
+</table>
+
+<br />
+<a [routerLink]="[]" (click)="selectTab(1)">Tab-1</a> &nbsp; | &nbsp;
+<a [routerLink]="[]" (click)="selectTab(2)">Tab-2</a> &nbsp; | &nbsp;
+<a [routerLink]="[]" (click)="selectTab(3)">Tab-3</a> &nbsp; | &nbsp;
+<a [routerLink]="[]" (click)="selectTab(4)">Tab-4</a> <br />
+
+<div [ngSwitch]="optionValue">
+  <div *ngSwitchCase="1">output - 1</div>
+  <div *ngSwitchCase="2">output - 2</div>
+  <div *ngSwitchCase="3">output - 3</div>
+  <div *ngSwitchCase="4">output - 4</div>
+
+  <div *ngSwitchDefault>Invalid Choice</div>
+</div>
+<br />
+
+<ng-container *ngIf="empStatus">
+  <div *ngFor="let emp of employees">
+    <p>{{ emp.empName }}</p>
+  </div>
+</ng-container>
