@@ -1,3 +1,4 @@
 <h2>This is Parent Component</h2>
-<app-child></app-child>
+<h2>{{firstName}}</h2>
+<app-child [firstname]="'Kranthi'" (fName)="capitalCase($event)"></app-child>
 <app-child1></app-child1>

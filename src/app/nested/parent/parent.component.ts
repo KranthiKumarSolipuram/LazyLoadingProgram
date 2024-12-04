@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class ParentComponent {
 
+    firstName !: string;
+
+    capitalCase(event : any){
+        this.firstName = event;
+    }
 }
